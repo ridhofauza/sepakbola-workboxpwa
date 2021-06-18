@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+
+.nav-wrapper .brand-logo {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin-left: 8px;
+}
+
+.card-title {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#list-tim img {
+  max-height: 250px;
+  object-fit: contain;
+  object-position: center;
+}
+
+#list-tersimpan-tim img {
+  max-height: 250px;
+  object-fit: contain;
+  object-position: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+}
+
+li {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 300;
+}
+
+.roboto-regular {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+}
+
+.roboto-light {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 300;
+}
+
+.logo-img {
+  max-height: 32px;
+}
+
+.center-loader {
+  margin-top: 125px;
+}

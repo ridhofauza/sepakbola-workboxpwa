@@ -1,0 +1,21 @@
+{
+  "name": "sepak-bola",
+  "version": "1.0.0",
+  "description": "https://www.football-data.org/\r Liga Inggris = 2021",
+  "main": "index.js",
+  "dependencies": {
+    "web-push": "^3.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "eslint-config-standard": "^16.0.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ridho",
+  "license": "ISC"
+}

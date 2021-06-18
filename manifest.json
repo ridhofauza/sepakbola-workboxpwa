@@ -1,0 +1,23 @@
+{
+  "name": "English League",
+  "gcm_sender_id": "275474605632",
+  "short_name": "EL-SB",
+  "description": "Aplikasi Sepak Bola Liga Inggris",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffab40",
+  "icons": [
+    {
+      "src": "maskable_icon.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

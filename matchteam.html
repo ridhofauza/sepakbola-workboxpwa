@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Sepak Bola</title>
+    <meta name="description" content="Sepak Bola">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffab40">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
+  <body>
+
+    <!-- Navigasi -->
+    <nav class="orange accent-4" role="navigation">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo">English-League</a>
+        <a href="#" onclick="goBack()" data-target="mobile-demo" class="sidenav-trigger">
+          <i class="large material-icons">arrow_back</i>
+        </a>
+      </div>
+    </nav>
+    <!-- Akhir navigasi -->
+    <!-- Ini Kontent -->
+    <div class="container" id="body-content">
+      <h4 class="valign center">Jadwal Pertandingan</h4>
+      <p id="info-data"></p>
+      <table class="striped valign center">
+        <thead class="roboto-regular">
+          <tr>
+            <th class="valign center">Club</th>
+            <th class="valign center">Date</th>
+          </tr>
+        </thead>
+        <tbody class="roboto-light"></tbody>
+      </table>
+    </div>
+    <!-- Batas Konten -->
+    <!-- Save Button -->
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red" id="save">
+        <i class="large material-icons">save</i>
+      </a>
+    </div>
+    <!-- Delete Button -->
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red" id="hapus">
+        <i class="large material-icons">delete</i>
+      </a>
+    </div>
+    <!-- Batas Delete Button -->
+
+    <script src="js/materialize.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/idb.js"></script>
+    <script src="js/db.js"></script>
+    <script type="text/javascript">
+      function goBack() {
+        window.history.back();
+      }
+
+      // REGISTER SERVICE WORKER
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('sw-wb.js')
+            .then(() => {
+              console.log('Pendaftaran ServiceWorker berhasil')
+            })
+            .catch(() => {
+              console.log('Pendaftaran ServiceWorker gagal')
+            })
+        })
+      } else {
+        console.log('Browser ini belum mendukung ServiceWorker')
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        let urlParams = new URLSearchParams(window.location.search)
+        let isFromSaved = urlParams.get('saved')
+        let idParam = urlParams.get('id')
+
+        let btnSave = document.getElementById('save')
+        let btnHapus = document.getElementById('hapus')
+        let item, itemB
+
+        if (isFromSaved) {
+          //sembunyikan button save
+          btnSave.style.display = 'none'
+          getSavedScheduleById()
+          //ambil data lalu tampilkan
+          // ...
+        } else {
+            item = getSchedulesById ()
+            itemB = getTeamsById ()
+            // sembunyikan button delete
+            btnHapus.style.display = 'none'
+        }
+
+        btnSave.onclick = () => {
+          item.then((schedule) => {
+            let data = {
+              'idParam': idParam,
+              'matches': schedule.matches
+            }
+            saveSchedule(data)
+          })
+
+          itemB.then((teams) => {
+            saveTeams(teams)
+          })
+          M.toast({html: 'Data Disimpan'})
+          // alert('Data disimpan')
+        }
+
+        // delete saved data
+        btnHapus.onclick = () => {
+            const deleteA = deleteSchedule(idParam)
+            const deleteB = deleteTeams(parseInt(idParam))
+
+            Promise.all([deleteA, deleteB])
+              .then(response => {
+                const [deleteA, deleteB] = response
+                if (deleteA === true && deleteB === true ) {
+                  M.toast({html: 'Data Berhasil Dihapus'})
+                  // alert('Data Berhasil Dihapus')
+                  location.reload()
+                } else {
+                  console.log('Gagal menghapus')
+                }
+              })
+          }
+      })
+    </script>
+  </body>
+</html>
